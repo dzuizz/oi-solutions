@@ -1,0 +1,30 @@
+[
+  {
+    "id": "aio",
+    "name": "Australian Informatics Olympiad",
+    "shortName": "AIO",
+    "years": [
+      { "year": 2005 },
+      { "year": 2006 },
+      { "year": 2017 },
+      { "year": 2018 }
+    ]
+  },
+  {
+    "id": "noi",
+    "name": "National Olympiad in Informatics",
+    "shortName": "NOI",
+    "years": [
+      { "year": 2014, "round": "finals" },
+      { "year": 2023, "round": "quals" }
+    ]
+  },
+  {
+    "id": "apio",
+    "name": "Asia-Pacific Informatics Olympiad",
+    "shortName": "APIO",
+    "years": [
+      { "year": 2018 }
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+[
+  { "id": "implementation", "name": "Implementation" },
+  { "id": "greedy", "name": "Greedy" },
+  { "id": "dp", "name": "Dynamic Programming" },
+  { "id": "binary-search", "name": "Binary Search" },
+  { "id": "graph", "name": "Graph" },
+  { "id": "math", "name": "Math" },
+  { "id": "sorting", "name": "Sorting" },
+  { "id": "stack", "name": "Stack" },
+  { "id": "geometry", "name": "Geometry" }
+]
