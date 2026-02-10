@@ -31,6 +31,14 @@ export function generateMetadata({
   });
 }
 
+function ChevronSep() {
+  return (
+    <svg className="mx-1.5 h-4 w-4 text-muted/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
+  );
+}
+
 export default async function ContestYearPage({
   params,
 }: {
@@ -49,30 +57,30 @@ export default async function ContestYearPage({
   return (
     <div className="space-y-6">
       <div>
-        <nav className="text-sm text-gray-500 dark:text-gray-400">
-          <Link href="/contests" className="hover:underline">
+        <nav className="flex items-center text-sm text-muted">
+          <Link href="/contests" className="transition-colors hover:text-foreground">
             Contests
           </Link>
-          {" / "}
-          <Link href={`/contests/${contestId}`} className="hover:underline">
+          <ChevronSep />
+          <Link href={`/contests/${contestId}`} className="transition-colors hover:text-foreground">
             {contest.shortName}
           </Link>
-          {" / "}
-          <span className="text-gray-900 dark:text-gray-100">
+          <ChevronSep />
+          <span className="text-foreground font-medium">
             {year}
             {yearEntry.round ? ` (${yearEntry.round})` : ""}
           </span>
         </nav>
-        <h1 className="mt-2 text-3xl font-bold">
+        <h1 className="mt-2 text-2xl font-bold tracking-tight">
           {contest.shortName} {year}
           {yearEntry.round ? ` (${yearEntry.round})` : ""}
         </h1>
       </div>
 
       {problems.length === 0 ? (
-        <p className="text-gray-500 dark:text-gray-400">
-          No solutions available yet.
-        </p>
+        <div className="rounded-xl border border-dashed border-border p-8 text-center">
+          <p className="text-muted">No solutions available yet.</p>
+        </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
           {problems.map((p) => (

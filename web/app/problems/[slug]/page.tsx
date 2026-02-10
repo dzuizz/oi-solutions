@@ -20,6 +20,14 @@ export function generateMetadata({
   });
 }
 
+function ChevronSep() {
+  return (
+    <svg className="mx-1.5 h-4 w-4 text-muted/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
+  );
+}
+
 export default async function ProblemPage({
   params,
 }: {
@@ -32,74 +40,89 @@ export default async function ProblemPage({
   return (
     <div className="space-y-8">
       {/* Breadcrumb */}
-      <nav className="text-sm text-gray-500 dark:text-gray-400">
-        <Link href="/problems" className="hover:underline">
+      <nav className="flex items-center text-sm text-muted">
+        <Link href="/" className="transition-colors hover:text-foreground">
           Problems
         </Link>
-        {" / "}
+        <ChevronSep />
         <Link
           href={`/contests/${problem.contest}`}
-          className="hover:underline"
+          className="transition-colors hover:text-foreground"
         >
           {contest?.shortName ?? problem.contest.toUpperCase()}
         </Link>
-        {" / "}
-        <span className="text-gray-900 dark:text-gray-100">
+        <ChevronSep />
+        <span className="text-foreground font-medium">
           {problem.title}
         </span>
       </nav>
 
-      {/* Header */}
-      <div className="space-y-3">
-        <h1 className="text-3xl font-bold">{problem.title}</h1>
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="text-sm text-gray-500 dark:text-gray-400">
-            {contest?.shortName ?? problem.contest.toUpperCase()} {problem.year}
-            {problem.round ? ` (${problem.round})` : ""}
-          </span>
-          <DifficultyBadge difficulty={problem.difficulty} />
-          {problem.topics.map((t) => (
-            <TopicTag key={t} id={t} />
-          ))}
+      {/* Header card */}
+      <div className="rounded-xl border border-border">
+        <div className="p-6 space-y-3">
+          <h1 className="text-3xl font-bold tracking-tight">{problem.title}</h1>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-sm text-muted">
+              {contest?.shortName ?? problem.contest.toUpperCase()} {problem.year}
+              {problem.round ? ` (${problem.round})` : ""}
+            </span>
+            <DifficultyBadge difficulty={problem.difficulty} />
+            {problem.topics.map((t) => (
+              <TopicTag key={t} id={t} />
+            ))}
+          </div>
+        </div>
+
+        {/* Complexity + source strip */}
+        <div className="flex flex-wrap items-center gap-6 border-t border-border px-6 py-3 text-sm">
+          <div>
+            <span className="text-muted">Time: </span>
+            <code className="font-mono">{problem.complexity.time}</code>
+          </div>
+          <div>
+            <span className="text-muted">Space: </span>
+            <code className="font-mono">{problem.complexity.space}</code>
+          </div>
+          {problem.sourceUrl && (
+            <a
+              href={problem.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-auto inline-flex items-center gap-1 text-primary transition-colors hover:text-primary-hover"
+            >
+              View original problem
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+            </a>
+          )}
         </div>
       </div>
 
-      {/* Complexity */}
-      <div className="flex gap-6 text-sm">
-        <div>
-          <span className="text-gray-500 dark:text-gray-400">Time: </span>
-          <code className="font-mono">{problem.complexity.time}</code>
-        </div>
-        <div>
-          <span className="text-gray-500 dark:text-gray-400">Space: </span>
-          <code className="font-mono">{problem.complexity.space}</code>
-        </div>
-      </div>
-
-      {/* Source link */}
-      {problem.sourceUrl && (
-        <a
-          href={problem.sourceUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block text-sm text-blue-600 hover:underline dark:text-blue-400"
-        >
-          View original problem →
-        </a>
-      )}
-
-      {/* Code */}
+      {/* Solution */}
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold">Solution</h2>
+        <h2 className="flex items-center gap-2 text-xl font-semibold">
+          <span className="h-5 w-1 rounded-full bg-primary" />
+          Solution
+        </h2>
         <CodeBlock code={problem.code} />
       </section>
 
-      {/* Editorial placeholder */}
+      {/* Editorial */}
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold">Editorial</h2>
-        <p className="text-gray-500 dark:text-gray-400">
-          {problem.content || "Editorial coming soon."}
-        </p>
+        <h2 className="flex items-center gap-2 text-xl font-semibold">
+          <span className="h-5 w-1 rounded-full bg-primary" />
+          Editorial
+        </h2>
+        {problem.content ? (
+          <p className="text-muted">{problem.content}</p>
+        ) : (
+          <div className="rounded-xl border border-dashed border-border p-8 text-center">
+            <p className="text-muted">Editorial coming soon.</p>
+            <p className="mt-1 text-xs text-muted/60">Contributions welcome</p>
+          </div>
+        )}
       </section>
     </div>
   );

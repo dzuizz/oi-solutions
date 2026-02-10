@@ -35,20 +35,24 @@ export default async function TopicDetailPage({
       <div>
         <Link
           href="/topics"
-          className="text-sm text-gray-500 hover:underline dark:text-gray-400"
+          className="inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-foreground"
         >
-          ← Topics
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
+          </svg>
+          Topics
         </Link>
-        <h1 className="mt-2 text-3xl font-bold">{topic.name}</h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <h1 className="mt-2 text-2xl font-bold tracking-tight">{topic.name}</h1>
+        <p className="text-sm text-muted">
           {problems.length} problem{problems.length !== 1 ? "s" : ""}
         </p>
       </div>
 
       {problems.length === 0 ? (
-        <p className="text-gray-500 dark:text-gray-400">
-          No problems with this topic yet.
-        </p>
+        <div className="rounded-xl border border-dashed border-border p-8 text-center">
+          <p className="text-muted">No problems with this topic yet.</p>
+        </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
           {problems.map((p) => (

@@ -7,13 +7,14 @@ export function ProblemCard({ problem }: { problem: ProblemMeta }) {
   return (
     <Link
       href={`/problems/${problem.slug}`}
-      className="block rounded-lg border border-gray-200 p-4 transition-colors hover:border-gray-400 dark:border-gray-800 dark:hover:border-gray-600"
+      className="group relative block overflow-hidden rounded-xl border border-border p-4 transition-all hover:border-primary/30 hover:shadow-md"
     >
+      <span className="absolute inset-y-0 left-0 w-1 bg-border transition-colors group-hover:bg-primary" />
       <div className="mb-2 flex items-center justify-between">
-        <h3 className="font-semibold">{problem.title}</h3>
+        <h3 className="font-semibold transition-colors group-hover:text-primary">{problem.title}</h3>
         <DifficultyBadge difficulty={problem.difficulty} />
       </div>
-      <p className="mb-3 text-sm text-gray-500 dark:text-gray-400">
+      <p className="mb-3 text-sm text-muted">
         {problem.contest.toUpperCase()} {problem.year}
         {problem.round ? ` (${problem.round})` : ""}
       </p>

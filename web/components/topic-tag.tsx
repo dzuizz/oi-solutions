@@ -5,7 +5,7 @@ export function TopicTag({ id, name }: { id: string; name?: string }) {
   return (
     <Link
       href={`/topics/${id}`}
-      className="inline-block rounded-md bg-gray-100 px-2 py-0.5 text-xs text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+      className="inline-block rounded-md bg-surface px-2 py-0.5 text-xs text-muted transition-colors hover:bg-surface-hover hover:text-foreground"
     >
       {label}
     </Link>
